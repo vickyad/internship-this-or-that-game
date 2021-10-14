@@ -1,16 +1,12 @@
-import {Component} from 'react'
+import { Component } from 'react'
+import ButtonType from '../../types/ButtonType'
 import './styles.css'
 
-type ButtonProps = {
-    handleClick: () => void
-    message: string
-}
-
-class Button extends Component <ButtonProps> {
+class Button extends Component<ButtonType> {
     render() {
         return (
             <button className="this-that-button" onClick={() => this.props.handleClick()}>{this.props.message}</button>
         )
     }
-  }
+}
 export default Button

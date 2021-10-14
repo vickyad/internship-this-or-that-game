@@ -1,15 +1,9 @@
-import { Component, CSSProperties } from 'react'
+import { Component } from 'react'
+import CardType from '../../types/CardType'
 import Button from '../button'
 import './styles.css'
 
-type CardProps = {
-    style: CSSProperties | undefined
-    imgUrl: string
-    buttonMessage: string
-    handleClick: () => void
-}
-
-class Card extends Component<CardProps> {
+class Card extends Component<CardType> {
     render() {
         return (
             <div style={this.props.style} className="this-that-card">

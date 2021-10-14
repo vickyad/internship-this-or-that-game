@@ -2,19 +2,10 @@ import { Component } from 'react'
 import Card from '../card'
 import axios from 'axios'
 import Leaderboard from '../leaderboard'
+import ImgDataType from '../../types/ImgDataType'
+import RequestResponseType from '../../types/RequestResponseType'
+import ThisOrThatStatesType from '../../types/ThisOrThatStatesType'
 import './styles.css'
-
-type ResponseType = {
-  image: string
-  link: string
-}
-
-type ThisOrThatStates = {
-  imagesSelected: { img: string, occurences: number }[]
-  thisImg: string
-  thatImg: string
-  opacity: number
-}
 
 const styles = {
   transition: 'all 1s ease-out'
@@ -25,7 +16,7 @@ const getLocalStorageData = () => {
   return rawData ? JSON.parse(rawData) : []
 }
 
-const addNewImg = (currentList: { img: string, occurences: number }[], newItem: string) => {
+const addNewImg = (currentList: ImgDataType[], newItem: string) => {
   const index = currentList.findIndex(x => x.img === newItem)
   if (index >= 0) {
     currentList[index] = { ...currentList[index], occurences: currentList[index].occurences + 1 }
@@ -36,7 +27,7 @@ const addNewImg = (currentList: { img: string, occurences: number }[], newItem: 
   return currentList
 }
 
-class ThisOrThatDisplay extends Component<{}, ThisOrThatStates> {
+class ThisOrThatDisplay extends Component<{}, ThisOrThatStatesType> {
   constructor(props: any) {
     super(props)
     this.state = {
@@ -44,7 +35,7 @@ class ThisOrThatDisplay extends Component<{}, ThisOrThatStates> {
       thisImg: '',
       thatImg: '',
       opacity: 1
-    } as ThisOrThatStates
+    } as ThisOrThatStatesType
   }
 
   componentDidMount() {
@@ -52,12 +43,12 @@ class ThisOrThatDisplay extends Component<{}, ThisOrThatStates> {
   }
 
   getImages() {
-    axios.get<ResponseType>('https://randomfox.ca/floof/').then(res => {
+    axios.get<RequestResponseType>('https://randomfox.ca/floof/').then(res => {
       if (res.data && res.data.image) {
         this.setState({ ...this.state, thisImg: res.data.image, opacity: 1 })
       }
     })
-    axios.get<ResponseType>('https://randomfox.ca/floof/').then(res => {
+    axios.get<RequestResponseType>('https://randomfox.ca/floof/').then(res => {
       if (res.data && res.data.image) {
         this.setState({ ...this.state, thatImg: res.data.image, opacity: 1 })
       }

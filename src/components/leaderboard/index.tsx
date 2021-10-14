@@ -1,11 +1,8 @@
 import { Component } from 'react'
+import LeaderboardType from '../../types/LeaderBoardType'
 import './styles.css'
 
-type LeaderboardProps = {
-    leaderboardList: { img: string, occurences: number }[]
-}
-
-class Leaderboard extends Component<LeaderboardProps> {
+class Leaderboard extends Component<LeaderboardType> {
     render() {
         return (
             <div className="leaderboard-wrapper">
